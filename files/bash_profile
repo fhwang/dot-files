@@ -1,0 +1,63 @@
+# mvim
+export EDITOR=/usr/local/bin/mvim
+export VISUAL=/usr/local/bin/mvim
+
+# git stuff from
+# http://0xfe.blogspot.com/2010/04/adding-git-status-information-to-your.html
+
+# Returns "*" if the current git branch is dirty.
+function parse_git_dirty {
+  [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "*"
+}
+
+# Returns "|shashed:N" where N is the number of stashed states (if any).
+function parse_git_stash {
+  local stash=`expr $(git stash list 2>/dev/null| wc -l)`
+  if [ "$stash" != "0" ]
+  then
+    echo "|stashed:$stash"
+  fi
+}
+
+# Get the current git branch name (if available)
+git_prompt() {
+  local ref=$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)
+  if [ "$ref" != "" ]
+  then
+    echo "($ref$(parse_git_dirty))"
+  fi
+}
+
+# git command-line prompt
+PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
+
+# bundler aliases
+alias be="bundle exec"
+
+# git aliases
+alias ga="git add"
+alias gbl="git blame"
+alias gbr="git branch"
+alias gc="git commit -a"
+alias gch="git checkout"
+alias gd="git diff"
+alias gg="git grep"
+alias gl="git log"
+alias gpom="git push origin master"
+alias gpr="git pull --rebase"
+alias gr="git reset"
+alias gs="git status"
+alias gsh="git stash"
+
+# rails aliases
+alias rc="be rails console"
+alias rdm="be rails db:migrate"
+alias rg="be rails generate"
+alias rs="be rails server"
+alias devlog="tail -f log/development.log"
+
+if [ -e "$HOME/.bash_profile.after" ]
+then
+  source "$HOME/.bash_profile.after"
+fi
+
