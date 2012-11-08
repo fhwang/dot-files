@@ -32,6 +32,8 @@ git_prompt() {
 # skipping for now
 #PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
 
+PS1='\w$ '
+
 # bundler aliases
 alias be="bundle exec"
 
