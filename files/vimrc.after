@@ -1,0 +1,16 @@
+color vividchalk
+set guifont=Monaco:h15.00
+set scrolloff=5
+set cursorline
+
+" automatically leave insert mode after 4 seconds of inaction
+au CursorHoldI * stopinsert
+set ut=4000
+
+set foldmethod=indent " trying code folding
+set foldlevelstart=99 " but open files unfolded
+
+" needed to edit crontab?
+set backupcopy=yes
+
+
