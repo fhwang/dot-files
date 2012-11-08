@@ -29,7 +29,8 @@ git_prompt() {
 }
 
 # git command-line prompt
-PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
+# skipping for now
+#PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
 
 # bundler aliases
 alias be="bundle exec"
