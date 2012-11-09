@@ -59,6 +59,8 @@ alias rg="be rails generate"
 alias rs="be rails server"
 alias devlog="tail -f log/development.log"
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
 if [ -e "$HOME/.bash_profile.after" ]
 then
   source "$HOME/.bash_profile.after"
