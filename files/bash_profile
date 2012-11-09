@@ -29,10 +29,8 @@ git_prompt() {
 }
 
 # git command-line prompt
-# skipping for now
-#PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
-
-PS1='\w$ '
+source /usr/share/git-core/git-completion.bash
+PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
 
 # bundler aliases
 alias be="bundle exec"
