@@ -1,6 +1,7 @@
 # mvim
 export EDITOR=/usr/local/bin/mvim
 export VISUAL=/usr/local/bin/mvim
+export GIT_EDITOR="/usr/local/bin/mvim -f"
 
 # git stuff from
 # http://0xfe.blogspot.com/2010/04/adding-git-status-information-to-your.html
