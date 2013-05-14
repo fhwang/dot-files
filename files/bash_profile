@@ -1,3 +1,6 @@
+# /usr/local/bin prioritized over /usr/bin in $PATH
+PATH=/usr/local/bin:$PATH
+
 # mvim
 export EDITOR=/usr/local/bin/mvim
 export VISUAL=/usr/local/bin/mvim
