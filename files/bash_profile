@@ -33,8 +33,8 @@ git_prompt() {
 }
 
 # git command-line prompt
-#source /usr/share/git-core/git-completion.bash
 source /usr/local/git/contrib/completion/git-completion.bash
+source /usr/local/git/contrib/completion/git-prompt.sh
 PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
 
 # bundler aliases
