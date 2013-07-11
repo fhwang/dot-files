@@ -43,29 +43,40 @@ alias be="bundle exec"
 # git aliases
 alias ga="git add"
 __git_complete ga _git_add
+
 alias gbl="git blame"
 __git_complete gbl _git_blame
 alias gbr="git branch"
 __git_complete gbr _git_branch
+
 alias gc="git commit -a"
 alias gch="git checkout"
 __git_complete gch _git_checkout
+alias gcp="git cherry-pick"
+
 alias gd="git diff"
 __git_complete gd _git_diff
+
 alias gfo="git fetch origin"
+
 alias gg="git grep"
 __git_complete gg _git_grep
+
 alias gl="git log"
 __git_complete gl _git_log
+
 alias gm="git mv"
 __git_complete gm _git_mv
+
 alias gpom="git push origin master"
 alias gpr="git pull --rebase"
+
 alias gre="git reset"
 __git_complete gre _git_reset
 alias grom="git rebase origin/master"
 alias grm="git rm"
 __git_complete grm _git_rm
+
 alias gs="git status"
 __git_complete gs _git_status
 alias gsh="git stash"
