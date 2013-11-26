@@ -1,2 +1,2 @@
 " ignore files for Ctrl-P etc
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.map
