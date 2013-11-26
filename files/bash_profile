@@ -86,7 +86,7 @@ __git_complete gsh _git_stash
 
 # rails aliases
 alias rc="be rails console"
-alias rdm="be rails db:migrate"
+alias rdm="be rake db:migrate"
 alias rg="be rails generate"
 alias rs="be rails server"
 alias devlog="tail -f log/development.log"
