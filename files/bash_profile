@@ -84,6 +84,9 @@ __git_complete gs _git_status
 alias gsh="git stash"
 __git_complete gsh _git_stash
 
+# migreazy branch autocompleting
+__git_complete "migreazy down" _git_branch
+
 # rails aliases
 alias rc="be rails console"
 alias rdm="be rake db:migrate"
