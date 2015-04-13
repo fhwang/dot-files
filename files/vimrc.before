@@ -1,2 +1,3 @@
 " ignore files for Ctrl-P etc
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.map
+call janus#disable_plugin('snipmate')
