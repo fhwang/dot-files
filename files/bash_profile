@@ -64,6 +64,8 @@ __git_complete gg _git_grep
 
 alias gl="git log"
 __git_complete gl _git_log
+alias glo="git log --pretty=oneline --abbrev-commit"
+__git_complete glo _git_log
 
 alias gm="git mv"
 __git_complete gm _git_mv
