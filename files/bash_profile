@@ -52,6 +52,7 @@ __git_complete gbr _git_branch
 alias gc="git commit -a"
 alias gch="git checkout"
 __git_complete gch _git_checkout
+alias gcm="git commit -a -m"
 alias gcp="git cherry-pick"
 
 alias gd="git diff"
