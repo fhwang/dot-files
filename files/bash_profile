@@ -97,6 +97,10 @@ alias rg="be rails generate"
 alias rs="be rails server"
 alias devlog="tail -f log/development.log"
 
+# Increase history
+export HISTFILESIZE=1000000
+export HISTSIZE=1000000
+
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 if [ -e "$HOME/.bash_profile.after" ]
