@@ -71,6 +71,7 @@ __git_complete glo _git_log
 alias gm="git mv"
 __git_complete gm _git_mv
 
+alias gpo="git push origin"
 alias gpom="git push origin master"
 alias gpr="git pull --rebase"
 
