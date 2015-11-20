@@ -40,6 +40,12 @@ PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
 # bundler aliases
 alias be="bundle exec"
 
+history_grep_tail() {
+  history | grep $1 | tail
+}
+
+alias hgt="history_grep_tail"
+
 # git aliases
 alias ga="git add"
 __git_complete ga _git_add
@@ -72,6 +78,7 @@ alias gm="git mv"
 __git_complete gm _git_mv
 
 alias gpo="git push origin"
+__git_complete gpo _git_push
 alias gpom="git push origin master"
 alias gpr="git pull --rebase"
 
