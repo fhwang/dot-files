@@ -76,9 +76,9 @@ __git_complete gg _git_grep
 
 alias gl="git log"
 __git_complete gl _git_log
-alias glo="git log --pretty=oneline --abbrev-commit"
+alias glo="git log --date=short --pretty=format:\"%cd: %h %s\""
 __git_complete glo _git_log
-alias gloh='function _gloh() { git log --pretty=oneline --abbrev-commit $1 |head; }; _gloh'
+alias gloh='function _gloh() { git log --date=short --pretty=format:"%cd: %h %s" $1 |head; }; _gloh'
 __git_complete gloh _git_log
 
 alias gm="git mv"
