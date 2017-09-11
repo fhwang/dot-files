@@ -21,3 +21,7 @@ set backupcopy=yes
 " Remove . from keyword inclusion, this seems to be done by the Go plugin, the
 " Clojure plugin, or both
 set iskeyword=@,48-57,_,192-255
+
+augroup AuNERDTreeCmd
+  autocmd!
+augroup end
