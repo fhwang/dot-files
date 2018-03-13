@@ -65,6 +65,7 @@ alias gch="git checkout"
 __git_complete gch _git_checkout
 alias gcm="git commit -a -m"
 alias gcp="git cherry-pick"
+alias gcw="git commit -a -m 'WIP'"
 
 alias gd="git diff"
 __git_complete gd _git_diff
