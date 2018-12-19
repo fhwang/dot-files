@@ -70,6 +70,7 @@ alias gcw="git commit -a -m 'WIP'"
 
 alias gd="git diff"
 __git_complete gd _git_diff
+alias gdm="git for-each-ref --format '%(refname:short)' --merged master refs/heads|grep -v master|xargs git branch -d"
 
 alias gfo="git fetch origin"
 
