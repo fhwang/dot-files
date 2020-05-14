@@ -52,8 +52,8 @@ history_grep_tail() {
 alias hgt="history_grep_tail"
 
 # docker-compose aliases
-
 alias dc="docker-compose"
+alias dcu="docker-compose up"
 alias dcud="docker-compose up --detach"
 alias dcl="docker-compose logs --tail=25 -f"
 alias dcps="docker-compose ps"
