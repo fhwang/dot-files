@@ -129,6 +129,11 @@ export HISTSIZE=1000000
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
+if [ -e "$HOME/.bash_profile.auth" ]
+then
+  source "$HOME/.bash_profile.auth"
+fi
+
 if [ -e "$HOME/.bash_profile.after" ]
 then
   source "$HOME/.bash_profile.after"
