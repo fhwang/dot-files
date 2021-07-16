@@ -92,7 +92,6 @@ alias gloh='function _gloh() { git log --date=short --pretty=format:"%cd | %h | 
 __git_complete gloh _git_log
 
 alias gm="git mv"
-__git_complete gm _git_mv
 
 alias gpo="git push origin"
 __git_complete gpo _git_push
