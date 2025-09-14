@@ -103,7 +103,16 @@ __git_complete gre _git_reset
 alias greh="git reset HEAD"
 __git_complete greh _git_reset
 
-alias grom='if git show-ref --quiet refs/remotes/origin/main; then git rebase origin/main; elif git show-ref --quiet refs/remotes/origin/master; then git rebase origin/master; else echo "Neither origin/main nor origin/master exists"; fi'
+_grom_helper() {
+    if git show-ref --quiet refs/remotes/origin/main; then
+        git rebase origin/main "$@";
+    elif git show-ref --quiet refs/remotes/origin/master; then
+        git rebase origin/master "$@";
+    else
+        echo "Neither origin/main nor origin/master exists";
+    fi;
+}
+alias grom='_grom_helper'
 
 alias grm="git rm"
 __git_complete grm _git_rm
