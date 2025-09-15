@@ -38,8 +38,17 @@ git_prompt() {
 }
 
 # git command-line prompt
-source /usr/local/etc/bash_completion.d/git-completion.bash
-source /usr/local/etc/bash_completion.d/git-prompt.sh
+if [ -f /opt/homebrew/etc/bash_completion.d/git-completion.bash ]; then
+  source /opt/homebrew/etc/bash_completion.d/git-completion.bash
+elif [ -f /usr/local/etc/bash_completion.d/git-completion.bash ]; then
+  source /usr/local/etc/bash_completion.d/git-completion.bash
+fi
+
+if [ -f /opt/homebrew/etc/bash_completion.d/git-prompt.sh ]; then
+  source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
+elif [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+  source /usr/local/etc/bash_completion.d/git-prompt.sh
+fi
 PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
 
 # bundler aliases
