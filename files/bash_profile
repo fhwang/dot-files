@@ -48,6 +48,8 @@ if [ -f /opt/homebrew/etc/bash_completion.d/git-prompt.sh ]; then
   source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
 elif [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
   source /usr/local/etc/bash_completion.d/git-prompt.sh
+elif [ -f /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh ]; then
+  source /Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh
 fi
 PS1='[\W$(__git_ps1 " $(git_prompt)")]\$ '
 
