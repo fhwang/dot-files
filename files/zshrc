@@ -1,0 +1,175 @@
+if [ -e "$HOME/.zshrc.before" ]
+then
+  source "$HOME/.zshrc.before"
+fi
+
+# /usr/local/bin prioritized over /usr/bin in $PATH
+PATH=/usr/local/bin:$PATH
+
+# mvim
+export EDITOR=/usr/local/bin/mvim
+export VISUAL=/usr/local/bin/mvim
+export GIT_EDITOR="/usr/local/bin/mvim -f"
+
+# git stuff from
+# http://0xfe.blogspot.com/2010/04/adding-git-status-information-to-your.html
+
+# Returns "*" if the current git branch is dirty.
+function parse_git_dirty {
+  [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo "*"
+}
+
+# Returns "|stashed:N" where N is the number of stashed states (if any).
+function parse_git_stash {
+  local stash=`expr $(git stash list 2>/dev/null| wc -l)`
+  if [ "$stash" != "0" ]
+  then
+    echo "|stashed:$stash"
+  fi
+}
+
+# Get the current git branch name (if available)
+git_prompt() {
+  local ref=$(git symbolic-ref HEAD 2>/dev/null | cut -d'/' -f3)
+  if [ "$ref" != "" ]
+  then
+    echo "($ref$(parse_git_dirty))"
+  fi
+}
+
+# Make Homebrew's zsh completions discoverable before compinit runs.
+if [ -d /opt/homebrew/share/zsh/site-functions ]; then
+  fpath=(/opt/homebrew/share/zsh/site-functions $fpath)
+elif [ -d /usr/local/share/zsh/site-functions ]; then
+  fpath=(/usr/local/share/zsh/site-functions $fpath)
+fi
+
+# git command-line prompt
+if [ -f /opt/homebrew/etc/bash_completion.d/git-prompt.sh ]; then
+  source /opt/homebrew/etc/bash_completion.d/git-prompt.sh
+elif [ -f /usr/local/etc/bash_completion.d/git-prompt.sh ]; then
+  source /usr/local/etc/bash_completion.d/git-prompt.sh
+fi
+
+setopt PROMPT_SUBST
+PS1='[%1~$(__git_ps1 " $(git_prompt)")]%# '
+
+# Completion system
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# bundler aliases
+alias be="bundle exec"
+
+history_grep_tail() {
+  history | grep $1 | tail
+}
+
+alias hgt="history_grep_tail"
+
+# docker-compose aliases
+alias dc="docker-compose"
+alias dcu="docker-compose up"
+alias dcud="docker-compose up --detach"
+alias dcl="docker-compose logs --tail=25 -f"
+alias dcps="docker-compose ps"
+alias dcs="docker-compose stop"
+
+# git aliases
+alias ga="git add"
+compdef _git ga=git-add
+
+alias gbl="git blame"
+alias gbr="git branch"
+compdef _git gbr=git-branch
+
+alias gc="git commit -a"
+alias gch="git checkout"
+compdef _git gch=git-checkout
+alias gcb="git checkout -b"
+alias gcm="git commit -a -m"
+alias gcp="git cherry-pick"
+alias gcw="git commit -a -m 'WIP'"
+
+alias gd="git diff"
+compdef _git gd=git-diff
+alias gdm="git for-each-ref --format '%(refname:short)' --merged master refs/heads|grep -v master|xargs git branch -d"
+
+alias gfo="git fetch origin"
+
+alias gg="git grep"
+compdef _git gg=git-grep
+
+alias gl="git log"
+compdef _git gl=git-log
+alias glo="git log --date=short --pretty=format:\"%cd | %h | %s\""
+compdef _git glo=git-log
+alias gloh='function _gloh() { git log --date=short --pretty=format:"%cd | %h | %s" $1 |head; }; _gloh'
+compdef _git gloh=git-log
+
+alias gm="git mv"
+
+alias gpo="git push origin"
+compdef _git gpo=git-push
+alias gpom="git push origin master"
+alias gpr="git pull --rebase"
+
+alias gre="git reset"
+compdef _git gre=git-reset
+alias greh="git reset HEAD"
+compdef _git greh=git-reset
+
+_grom_helper() {
+    if git show-ref --quiet refs/remotes/origin/main; then
+        git rebase origin/main "$@";
+    elif git show-ref --quiet refs/remotes/origin/master; then
+        git rebase origin/master "$@";
+    else
+        echo "Neither origin/main nor origin/master exists";
+    fi;
+}
+alias grom='_grom_helper'
+
+alias grm="git rm"
+compdef _git grm=git-rm
+
+alias gs="git status"
+compdef _git gs=git-status
+alias gsh="git stash"
+compdef _git gsh=git-stash
+
+# migreazy down branch autocompleting
+_migreazy() {
+  if [[ $CURRENT -ge 3 && $words[2] == "down" ]]; then
+    local -a branches
+    branches=(${(f)"$(git branch --format='%(refname:short)' 2>/dev/null)"})
+    _describe 'branch' branches
+  fi
+}
+compdef _migreazy migreazy
+
+# rails aliases
+alias rc="be rails console"
+alias rdm="be rake db:migrate"
+alias rg="be rails generate"
+alias rs="be rails server"
+alias devlog="tail -f log/development.log"
+
+# History
+HISTSIZE=1000000
+SAVEHIST=1000000
+HISTFILE="$HOME/.zsh_history"
+setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS INC_APPEND_HISTORY
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+if [ -e "$HOME/.zshrc.auth" ]
+then
+  source "$HOME/.zshrc.auth"
+fi
+
+if [ -e "$HOME/.zshrc.after" ]
+then
+  source "$HOME/.zshrc.after"
+fi
