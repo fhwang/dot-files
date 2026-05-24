@@ -64,12 +64,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # bundler aliases
 alias be="bundle exec"
 
-history_grep_tail() {
-  history | grep $1 | tail
-}
-
-alias hgt="history_grep_tail"
-
 # docker-compose aliases
 alias dc="docker-compose"
 alias dcu="docker-compose up"
@@ -163,6 +157,11 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 HISTFILE="$HOME/.zsh_history"
 setopt HIST_IGNORE_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS INC_APPEND_HISTORY
+
+# fzf: fuzzy Ctrl-R history search, Ctrl-T file picker, Alt-C cd
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
