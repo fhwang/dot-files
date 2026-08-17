@@ -6,10 +6,15 @@ fi
 # /usr/local/bin prioritized over /usr/bin in $PATH
 PATH=/usr/local/bin:$PATH
 
-# mvim
-export EDITOR=/usr/local/bin/mvim
-export VISUAL=/usr/local/bin/mvim
-export GIT_EDITOR="/usr/local/bin/mvim -f"
+# neovide
+if [ -x /opt/homebrew/bin/neovide ]; then
+  NEOVIDE_BIN=/opt/homebrew/bin/neovide
+else
+  NEOVIDE_BIN=/usr/local/bin/neovide
+fi
+export EDITOR="$NEOVIDE_BIN"
+export VISUAL="$NEOVIDE_BIN"
+export GIT_EDITOR="$NEOVIDE_BIN --no-fork"
 
 # git stuff from
 # http://0xfe.blogspot.com/2010/04/adding-git-status-information-to-your.html
