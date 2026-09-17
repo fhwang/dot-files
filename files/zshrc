@@ -61,8 +61,17 @@ fi
 setopt PROMPT_SUBST
 PS1='[%1~$(__git_ps1 " $(git_prompt)")]%# '
 
-# Completion system
-autoload -Uz compinit && compinit
+# Completion system. compinit has to run here: after fpath is set up, but
+# before the compdef calls below. To customize it on a given machine, define
+# run_compinit in ~/.zshrc.before -- e.g. `run_compinit() { compinit -u }` where
+# directories are group-writable, `compinit -d "$XDG_CACHE_HOME/zcompdump"` for a
+# different dump file, or an empty body to skip it when something else (oh-my-zsh,
+# prezto) already ran compinit.
+autoload -Uz compinit
+if (( ! $+functions[run_compinit] )); then
+  run_compinit() { compinit }
+fi
+run_compinit
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
